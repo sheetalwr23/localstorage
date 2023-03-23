@@ -71,8 +71,10 @@ function displayRegistration() {
     tableBody.innerHTML += `<tr><td>${item.name}</td>
     <td>${item.email}</td>
     <td>
-    <a href="#" onclick="deleteRegi(${index})"><button>delete</button><a>
     
+    <a href="#" onclick="editRegi(${index})">
+  <button>edit</button>
+</a>
     </td>
     </tr>`;
 
@@ -81,16 +83,13 @@ function displayRegistration() {
 }
 displayRegistration();
 
-//task 13 delete button
-function deleteRegi(index) {
-  if (confirm("do you really want to delete this record?")) {
-    console.log("i m eating more more more galiya");
-    const registration = JSON.parse(localStorage.getItem("registration"));
-    // console.log(registration);
-    // console.log(registration[index]);
-    let removed = registration.splice(index, 1);
-    localStorage.setItem("registration", JSON.stringify(registration));
-
-    displayRegistration();
-  }
+// task 14 edit button
+function editRegi(index) {
+  const registration = JSON.parse(localStorage.getItem("registration"));
+  console.log(index, registration[index]);
+  document.getElementById("name").value = registration[index].name;
+  document.getElementById("email").value = registration[index].email;
+  localStorage.setItem("editFlag", true);
+  localStorage.setItem("index", JSON.stringify(index));
+  document.getElementById("submit_btn").value = "update";
 }
